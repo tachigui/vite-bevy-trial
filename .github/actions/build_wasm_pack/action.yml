@@ -1,0 +1,16 @@
+name: build_wasm_pack
+description: building by wasm-pack
+runs:
+  using: composite
+  steps:
+    - name: Install tools
+      run: cargo install --force cargo-make wasm-pack
+      working-directory: wasm/bevy-app
+    - name: Build by wasm-pack
+      run: cargo make build
+      working-directory: wasm/bevy-app
+    - name: Upload dist folder
+      uses: actions/upload-artifact@v3
+      with:
+        name: bevy-app-dist
+        path: wasm/bevy-app/dist
