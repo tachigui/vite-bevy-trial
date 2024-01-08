@@ -3,7 +3,7 @@ description: building vite
 runs:
   using: composite
   steps:
-    - Setup node
+    - name: Setup node
       uses: actions/setup-node@v4
       with:
         node-version: latest
