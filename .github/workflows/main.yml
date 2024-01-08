@@ -6,12 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache_cargo
-      - uses: ./.github/actions/build_wasm_pack
-      - name: Upload dist folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: bevy-app-dist
-          path: wasm/bevy-app/dist
+      - uses: ./.github/actions/build_rust_and_upload
   build-js:
     needs: build-rust
     runs-on: ubuntu-latest
