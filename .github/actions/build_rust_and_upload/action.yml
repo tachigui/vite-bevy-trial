@@ -1,9 +1,5 @@
 name: build_rust_and_upload
 description: building by wasm-pack and upload artifact
-defaults:
-  run:
-    shell: bash
-    working-directory: wasm/bevy-app
 runs:
   using: composite
   steps:
@@ -14,10 +10,14 @@ runs:
         toolchain: stable
     - name: Install tools
       run: cargo install --force cargo-make wasm-pack
+      shell: bash
+      working-directory: wasm/bevy-app
     - name: Build by wasm-pack
       run: cargo make build
+      shell: bash
+      working-directory: wasm/bevy-app
     - name: Upload dist folder
       uses: actions/upload-artifact@v4
       with:
         name: bevy-app-dist
-        path: dist
+        path: wasm/bevy-app/dist
