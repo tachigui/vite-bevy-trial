@@ -1,0 +1,14 @@
+name: build_vite
+description: building vite
+runs:
+  using: composite
+
+  steps:
+    - Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
