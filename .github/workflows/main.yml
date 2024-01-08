@@ -10,8 +10,9 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          targets: wasm32-unknown-unknown
-          components: cargo-make, wasm-pack
+      - name: install tools
+        run: cargo add cargo-make, wasm-pack
+        working-directory: wasm/bevy-app
       - name: echo
         run: cargo make echo
         working-directory: wasm/bevy-app
