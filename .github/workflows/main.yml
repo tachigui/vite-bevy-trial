@@ -11,7 +11,7 @@ jobs:
         with:
           toolchain: stable
       - name: install tools
-        run: cargo add cargo-make, wasm-pack
+        run: cargo add cargo-make wasm-pack
         working-directory: wasm/bevy-app
       - name: echo
         run: cargo make echo
