@@ -1,8 +1,11 @@
 name: cache_cargo
 description: caching .cargo directory
+inputs:
+  dir:
+    default: ''
+    required: false
 runs:
   using: composite
-
   steps:
     - name: Cache cargo registry
       uses: actions/cache@v3
@@ -12,6 +15,6 @@ runs:
           ~/.cargo/registry/index/
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
-          wasm/bevy-app/target/
+          ${{ input.dir }}/target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
         restore-keys: ${{ runner.os }}-cargo-
