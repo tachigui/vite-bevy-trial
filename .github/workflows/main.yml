@@ -1,12 +1,19 @@
 on: push
-  
+
+env:
+  rust-path: wasm/bevy-app
+
 jobs:
   build-rust:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache_cargo
+        with:
+          dir: ${{ env.rust-path }}
       - uses: ./.github/actions/build_rust_and_upload
+        with:
+          dir: ${{ env.rust-path }}
   build-js:
     needs: build-rust
     runs-on: ubuntu-latest
@@ -16,7 +23,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bevy-app-dist
-          path: wasm/bevy-app/dist
+          path: ${{ env.rust-path }}/dist
       - uses: ./.github/actions/build_vite
       - name: Upload pages
         uses: actions/upload-pages-artifact@v3
