@@ -1,38 +1,34 @@
 on: push
   
 jobs:
-  build:
+  build-rust:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache_cargo
-      - name: Set Toolchain
-        # https://github.com/dtolnay/rust-toolchain
-        uses: dtolnay/rust-toolchain@master
+      - uses: ./.github/actions/build_wasm_pack
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
         with:
-          toolchain: stable
-      - name: install tools
-        run: cargo install --force cargo-make wasm-pack
-        working-directory: wasm/bevy-app
-      - name: echo
-        run: cargo make echo
-        working-directory: wasm/bevy-app
-      - name: build
-        run: cargo make build
-        working-directory: wasm/bevy-app
-      - uses: actions/setup-node@v4
+          name: bevy-app-dist
+          path: wasm/bevy-app/dist
+  build-js:
+    needs: build-rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download dist folder
+        uses: actions/download-artifact@v4
         with:
-          node-version: latest
-      - name: install dependencies
-        run: npm install
-      - name: build
-        run: npm run build
-      - name: upload pages
-        uses: actions/upload-pages-artifact@v1
+          name: bevy-app-dist
+          path: wasm/bevy-app/dist
+      - uses: ./.github/actions/build_vite
+      - name: Upload pages
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
   deploy:
-    needs: build
+    needs: build-js
     permissions:
       pages: write
       id-token: write
@@ -43,4 +39,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
