@@ -1,8 +1,9 @@
-name: build_wasm_pack
-description: building by wasm-pack
+name: build_rust_and_upload
+description: building by wasm-pack and upload artifact
 runs:
   using: composite
   steps:
+    - uses: actions/checkout@v4
     - name: Set rust toolchain
       # https://github.com/dtolnay/rust-toolchain
       uses: dtolnay/rust-toolchain@master
@@ -14,3 +15,8 @@ runs:
     - name: Build by wasm-pack
       run: cargo make build
       working-directory: wasm/bevy-app
+    - name: Upload dist folder
+      uses: actions/upload-artifact@v4
+      with:
+        name: bevy-app-dist
+        path: wasm/bevy-app/dist
