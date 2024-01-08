@@ -14,14 +14,14 @@ runs:
     - name: Install tools
       run: cargo install --force cargo-make wasm-pack
       shell: bash
-      working-directory: ${{ github.event.inputs.dir }}
+      working-directory: ${{ inputs.dir }}
     - name: Build by wasm-pack
       run: cargo make build
       shell: bash
-      working-directory: ${{ github.event.inputs.dir }}
+      working-directory: ${{ inputs.dir }}
     - name: Upload dist folder
       uses: actions/upload-artifact@v4
       with:
         name: bevy-app-dist
-        path: ${{ github.event.inputs.dir }}/dist
+        path: ${{ inputs.dir }}/dist
         retention-days: 3
