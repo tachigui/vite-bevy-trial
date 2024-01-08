@@ -8,9 +8,7 @@ interface Props {
 export const AppProvider = ({ children }: Props) => {
   return (
     <StrictMode>
-      <BrowserRouter basename={import.meta.env.DEV ? '/' : '/vite-bevy-trial/'}>
-        {children}
-      </BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>{children}</BrowserRouter>
     </StrictMode>
   );
 };
