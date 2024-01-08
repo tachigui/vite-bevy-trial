@@ -1,0 +1,30 @@
+[tasks.echo]
+description = "Echo command by cargo make"
+command = "echo"
+args = ["echo sample by cargo make."]
+
+[tasks.dev-build]
+description = "Build for dev by wasm-pack"
+command = "wasm-pack"
+args = [
+    "build",
+    "--target",
+    "web",
+    "--out-dir",
+    "dev/dist",
+    "--out-name",
+    "index",
+]
+
+[tasks.dev-start]
+description = "Serve by basic-http-server"
+command = "basic-http-server"
+args = ["./dev", "--addr", "127.0.0.1:8080"]
+
+[tasks.dev]
+dependencies = ["dev-build", "dev-start"]
+
+[tasks.build]
+description = "Build for release by wasm-pack"
+command = "wasm-pack"
+args = ["build", "--release", "--target", "web", "--out-dir", "dist"]
