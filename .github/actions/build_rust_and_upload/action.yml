@@ -3,7 +3,6 @@ description: building by wasm-pack and upload artifact
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
     - name: Set rust toolchain
       # https://github.com/dtolnay/rust-toolchain
       uses: dtolnay/rust-toolchain@master
