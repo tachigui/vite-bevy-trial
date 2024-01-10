@@ -2,7 +2,7 @@ on: push
 
 env:
   RUST_DIR: wasm/bevy-app
-  
+
 jobs:
   build-rust:
     runs-on: ubuntu-latest
@@ -12,6 +12,16 @@ jobs:
         with:
           dir: '${{ env.RUST_DIR }}'
       - uses: ./.github/actions/build_rust_and_upload
+        with:
+          dir: '${{ env.RUST_DIR }}'
+  build-rust-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache_cargo
+        with:
+          dir: '${{ env.RUST_DIR }}'
+      - uses: ./.github/actions/build_rust_dev
         with:
           dir: '${{ env.RUST_DIR }}'
   build-js:

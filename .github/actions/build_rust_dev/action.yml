@@ -1,0 +1,21 @@
+name: build_rust_dev
+description: building for dev by wasm-pack
+inputs:
+  dir:
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set rust toolchain
+      # https://github.com/dtolnay/rust-toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: stable
+    - name: Install tools
+      run: cargo install --force cargo-make wasm-pack
+      shell: bash
+      working-directory: ${{ inputs.dir }}
+    - name: Build by wasm-pack
+      run: cargo make dev-build
+      shell: bash
+      working-directory: ${{ inputs.dir }}
