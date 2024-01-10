@@ -8,6 +8,7 @@ description = "Build for dev by wasm-pack"
 command = "wasm-pack"
 args = [
     "build",
+    "--dev",
     "--target",
     "web",
     "--out-dir",
