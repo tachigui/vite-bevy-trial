@@ -15,5 +15,8 @@ crate-type = ["cdylib", "rlib"]
 [profile.dev]
 opt-level = 1
 
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false
+
 [profile.release]
 opt-level = 3
