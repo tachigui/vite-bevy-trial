@@ -16,5 +16,9 @@ runs:
       run: cargo build --release --target x86_64-pc-windows-msvc
       shell: bash
       working-directory: ${{ inputs.dir }}
-    - run: ls -R
-      shell: bash
+    - name: Upload dist folder
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows
+        path: ${{ inputs.dir }}/target/x86_64-pc-windows-msvc/release/bevy-app.exe
+        retention-days: 1
