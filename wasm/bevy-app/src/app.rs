@@ -10,6 +10,7 @@ pub fn run() {
     let primary_window = Some(window);
 
     App::new()
+        .insert_resource(ClearColor(Color::rgb_u8(47, 128, 112)))
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window,
             ..Default::default()
