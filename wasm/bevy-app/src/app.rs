@@ -14,6 +14,6 @@ pub fn run() {
             primary_window,
             ..Default::default()
         }))
-        .insert_resource(ClearColor(Color::rgb_u8(47, 128, 112)))
+        .insert_resource(ClearColor(Color::rgb(0.9, 0.9, 0.9)))
         .run();
 }
