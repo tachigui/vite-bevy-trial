@@ -1,0 +1,20 @@
+name: build_windows_and_upload
+description: building by cargo for windows and upload artifact
+inputs:
+  dir:
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set rust toolchain
+      # https://github.com/dtolnay/rust-toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: stable
+        targets: x86_64-pc-windows-msvc
+    - name: Build by cargo
+      run: cargo build --release --target x86_64-pc-windows-msvc
+      shell: bash
+      working-directory: ${{ inputs.dir }}
+    - run: ls -R
+      shell: bash
