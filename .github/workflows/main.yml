@@ -6,13 +6,12 @@ on:
 env:
   RUST_DIR: wasm/bevy-app
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/create-github-app-token@v1
         id: generate-token
