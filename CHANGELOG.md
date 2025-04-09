@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/tachiguitech/vite-bevy-trial/compare/v1.0.0...v1.0.1) (2024-03-23)
+
+
+### Bug Fixes
+
+* 💚 GithubActionsの権限設定を修正 ([e63ae4f](https://github.com/tachiguitech/vite-bevy-trial/commit/e63ae4f761be5cb95d5bf27037ba7e89659038a1))
+
 ## 1.0.0 (2024-03-23)
 
 
